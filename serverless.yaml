@@ -1,0 +1,24 @@
+service: ha-drawing-text-lambda
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: us-east-2
+  lambdaHashingVersion: '20201221'
+  iam:
+    role:
+      managedPolicies:
+        - 'arn:aws:iam::aws:policy/AWSLambda_FullAccess'
+
+functions:
+  ha-drawing-text-lambda:
+    name: ha-drawing-text-lambda
+    handler: index.endpoint
+    events:
+      - http:
+          path: api/generate
+          method: post
+          cors: true
+          private: false
+
